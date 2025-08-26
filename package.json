@@ -1,8 +1,19 @@
 {
   "name": "rectanglezone",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Canvas rectangle drawing utilities for detection purposes",
+  "main": "src/lib/index.ts",
+  "types": "src/lib/index.ts",
   "type": "module",
+  "keywords": [
+    "canvas",
+    "rectangle",
+    "drawing",
+    "detection",
+    "annotations"
+  ],
+  "author": "Ravi Jha",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -25,5 +36,10 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
-  }
+  },
+  "files": [
+    "src/lib/**/*",
+    "README.md",
+    "LICENSE"
+  ]
 }

@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import RectangleZone from "./lib/RectangleZone";
+import { RectangleZone } from "./lib/RectangleZone";
 import type { Rectangle } from "./lib/types";
 
 function App() {

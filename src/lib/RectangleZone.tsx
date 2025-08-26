@@ -68,4 +68,4 @@ const RectangleZone = ({
   );
 };
 
-export default RectangleZone;
+export { RectangleZone };
