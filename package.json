@@ -1,16 +1,21 @@
 {
   "name": "rectanglezone",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Canvas rectangle drawing utilities for detection purposes",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
+    "./dist/*": "./dist/*",
     "./style.css": "./dist/assets/rectanglezone.css"
   },
   "files": [
