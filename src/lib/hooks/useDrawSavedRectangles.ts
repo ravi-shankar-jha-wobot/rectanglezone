@@ -7,7 +7,6 @@ type useDrawSavedRectanglesProps = {
   imgRef: React.RefObject<HTMLImageElement | null>;
   rectangles: Rectangle[];
   scale: number;
-  show: boolean;
 };
 
 export function useDrawSavedRectangles({
@@ -15,10 +14,8 @@ export function useDrawSavedRectangles({
   imgRef,
   rectangles,
   scale,
-  show,
 }: useDrawSavedRectanglesProps) {
   const drawSavedRectangles = useCallback(() => {
-    if (!show) return;
     rectangles.forEach((rectangle) => {
       drawRectangle({
         canvasRef,
@@ -26,7 +23,7 @@ export function useDrawSavedRectangles({
         rectangle,
       });
     });
-  }, [rectangles, canvasRef, imgRef, show]);
+  }, [rectangles, canvasRef, imgRef]);
   useEffect(() => {
     const canvas = canvasRef?.current;
     const ctx = canvas?.getContext("2d");

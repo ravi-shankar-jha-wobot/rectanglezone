@@ -13,7 +13,7 @@ type UseHandlersProps = {
   savedRectangles: Rectangle[];
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
   drawSavedRectangles: () => void;
-  onChange: ({ coordinates }: { coordinates: Coordinate[] }) => void;
+  onChange: () => void;
 };
 
 export const useHandlers = ({
@@ -104,22 +104,8 @@ export const useHandlers = ({
         coordinates: [topLeft, topRight, bottomRight, bottomLeft],
       }));
 
-      console.log("About to call onChange with coordinates:", [
-        topLeft,
-        topRight,
-        bottomRight,
-        bottomLeft,
-      ]);
-      console.log("onChange function:", onChange);
-      console.log("typeof onChange:", typeof onChange);
-
-      try {
-        onChange({
-          coordinates: [topLeft, topRight, bottomRight, bottomLeft],
-        });
-        console.log("onChange called successfully");
-      } catch (error) {
-        console.error("Error calling onChange:", error);
+      if (typeof onChange === "function") {
+        onChange();
       }
 
       clearAndDrawBackground({
