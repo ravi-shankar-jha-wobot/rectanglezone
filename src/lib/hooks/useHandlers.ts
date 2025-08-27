@@ -51,12 +51,21 @@ export const useHandlers = ({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
+      console.log("handleMouseMove called", {
+        isDrawing: isDrawingRef.current,
+        setDrawnRectangleType: typeof setDrawnRectangle,
+        drawnRectangle,
+        hasDrawnRectangle: !!drawnRectangle,
+      });
+
       if (
         !isDrawingRef.current ||
         typeof setDrawnRectangle !== "function" ||
         !drawnRectangle
-      )
+      ) {
+        console.log("Early return from handleMouseMove");
         return;
+      }
       const canvas = canvasRef.current;
       const img = imgRef.current;
 
@@ -94,9 +103,24 @@ export const useHandlers = ({
         ...prev,
         coordinates: [topLeft, topRight, bottomRight, bottomLeft],
       }));
-      onChange({
-        coordinates: [topLeft, topRight, bottomRight, bottomLeft],
-      });
+
+      console.log("About to call onChange with coordinates:", [
+        topLeft,
+        topRight,
+        bottomRight,
+        bottomLeft,
+      ]);
+      console.log("onChange function:", onChange);
+      console.log("typeof onChange:", typeof onChange);
+
+      try {
+        onChange({
+          coordinates: [topLeft, topRight, bottomRight, bottomLeft],
+        });
+        console.log("onChange called successfully");
+      } catch (error) {
+        console.error("Error calling onChange:", error);
+      }
 
       clearAndDrawBackground({
         ctx,
