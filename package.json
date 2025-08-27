@@ -1,11 +1,21 @@
 {
   "name": "rectanglezone",
-  "private": true,
   "version": "1.0.0",
   "description": "Canvas rectangle drawing utilities for detection purposes",
-  "main": "src/lib/index.ts",
-  "types": "src/lib/index.ts",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/assets/rectanglezone.css"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "canvas",
     "rectangle",
@@ -16,7 +26,8 @@
   "author": "Ravi Jha",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build && tsc --project tsconfig.build.json",
+    "build:lib": "vite build && tsc --project tsconfig.build.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -26,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react-swc": "^4.0.0",
@@ -36,10 +48,5 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
-  },
-  "files": [
-    "src/lib/**/*",
-    "README.md",
-    "LICENSE"
-  ]
+  }
 }
