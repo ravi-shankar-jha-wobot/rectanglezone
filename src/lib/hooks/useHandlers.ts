@@ -51,19 +51,11 @@ export const useHandlers = ({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
-      console.log("handleMouseMove called", {
-        isDrawing: isDrawingRef.current,
-        setDrawnRectangleType: typeof setDrawnRectangle,
-        drawnRectangle,
-        hasDrawnRectangle: !!drawnRectangle,
-      });
-
       if (
         !isDrawingRef.current ||
         typeof setDrawnRectangle !== "function" ||
         !drawnRectangle
       ) {
-        console.log("Early return from handleMouseMove");
         return;
       }
       const canvas = canvasRef.current;

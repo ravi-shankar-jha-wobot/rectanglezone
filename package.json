@@ -2,16 +2,22 @@
   "name": "rectanglezone",
   "private": true,
   "version": "1.0.0",
-  "description": "Canvas rectangle drawing utilities for detection purposes",
-  "main": "src/lib/index.ts",
-  "types": "src/lib/index.ts",
   "type": "module",
-  "keywords": [
-    "canvas",
-    "rectangle",
-    "drawing",
-    "detection",
-    "annotations"
+  "description": "Canvas rectangle drawing utilities for detection purposes",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
   ],
   "author": "Ravi Jha",
   "scripts": {
@@ -36,10 +42,5 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
-  },
-  "files": [
-    "src/lib/**/*",
-    "README.md",
-    "LICENSE"
-  ]
+  }
 }
