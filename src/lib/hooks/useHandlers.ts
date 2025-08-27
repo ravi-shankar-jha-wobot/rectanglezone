@@ -9,9 +9,8 @@ import {
 type UseHandlersProps = {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   imgRef: React.RefObject<HTMLImageElement | null>;
-  drawnRectangle: Rectangle;
+  drawnRectangle: Rectangle | null;
   savedRectangles: Rectangle[];
-  setSavedRectangles: React.Dispatch<React.SetStateAction<Rectangle[]>>;
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
   drawSavedRectangles: () => void;
 };
@@ -21,56 +20,11 @@ export const useHandlers = ({
   imgRef,
   drawnRectangle,
   savedRectangles,
-  setSavedRectangles,
   setDrawnRectangle,
   drawSavedRectangles,
 }: UseHandlersProps) => {
   const isDrawingRef = useRef(false);
   const startPointRef = useRef<Coordinate>({ x: 0, y: 0 });
-
-  // Helper function to draw rectangle on canvas
-  //   const drawRectangle = useCallback(
-  //     (
-  //       startPoint: Coordinate,
-  //       endPoint: Coordinate,
-  //       color: string = "#3766E8"
-  //     ) => {
-  //       const canvas = canvasRef.current;
-  //       const img = imgRef.current;
-
-  //       if (!canvas || !img) return;
-
-  //       const ctx = canvas.getContext("2d");
-  //       if (!ctx) return;
-
-  //       // Clear the canvas
-  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  //       // Draw all saved rectangles
-  //       savedRectangles.forEach((rectangle) => {
-  //         if (rectangle.coordinates.length >= 4) {
-  //           const [topLeft, , bottomRight] = rectangle.coordinates;
-  //           ctx.strokeStyle = rectangle.color || "#3766E8";
-  //           ctx.lineWidth = 2;
-  //           ctx.strokeRect(
-  //             topLeft.x,
-  //             topLeft.y,
-  //             bottomRight.x - topLeft.x,
-  //             bottomRight.y - topLeft.y
-  //           );
-  //         }
-  //       });
-
-  //       // Draw current rectangle being drawn
-  //       const width = endPoint.x - startPoint.x;
-  //       const height = endPoint.y - startPoint.y;
-
-  //       ctx.strokeStyle = color;
-  //       ctx.lineWidth = 2;
-  //       ctx.strokeRect(startPoint.x, startPoint.y, width, height);
-  //     },
-  //     [canvasRef, imgRef, savedRectangles]
-  //   );
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -95,7 +49,12 @@ export const useHandlers = ({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
-      if (!isDrawingRef.current) return;
+      if (
+        !isDrawingRef.current ||
+        typeof setDrawnRectangle !== "function" ||
+        !drawnRectangle
+      )
+        return;
       const canvas = canvasRef.current;
       const img = imgRef.current;
 
@@ -133,11 +92,6 @@ export const useHandlers = ({
         ...prev,
         coordinates: [topLeft, topRight, bottomRight, bottomLeft],
       }));
-      //   drawSavedRectangles
-
-      // Draw the rectangle on canvas
-      //   drawRectangle(topLeft, bottomRight, drawnRectangle.color || "#3766E8");
-      // Clear the canvas
 
       clearAndDrawBackground({
         ctx,
@@ -155,39 +109,14 @@ export const useHandlers = ({
         },
       });
     },
-    [
-      drawSavedRectangles,
-      canvasRef,
-      setDrawnRectangle,
-      drawnRectangle.color,
-      drawnRectangle.name,
-      imgRef,
-    ]
+    [drawnRectangle, drawSavedRectangles, canvasRef, setDrawnRectangle, imgRef]
   );
 
   const handleMouseUp = useCallback(() => {
     if (!isDrawingRef.current) return;
 
     isDrawingRef.current = false;
-
-    // Only save the rectangle if it has meaningful dimensions
-    if (drawnRectangle.coordinates.length === 4) {
-      const [topLeft, , bottomRight] = drawnRectangle.coordinates;
-      const width = Math.abs(bottomRight.x - topLeft.x);
-      const height = Math.abs(bottomRight.y - topLeft.y);
-
-      if (width > 5 && height > 5) {
-        setSavedRectangles((prev) => [...prev, drawnRectangle]);
-      }
-    }
-
-    // Reset the drawn rectangle
-    setDrawnRectangle({
-      name: "",
-      color: "#3766E8",
-      coordinates: [],
-    });
-  }, [drawnRectangle, setSavedRectangles, setDrawnRectangle]);
+  }, []);
 
   return {
     handleMouseMove,

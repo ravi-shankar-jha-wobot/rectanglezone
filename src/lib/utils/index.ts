@@ -36,20 +36,33 @@ export const drawRectangle = ({
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  // Draw all saved rectangles
+  // Draw rectangle if it has enough coordinates
   if (rectangle.coordinates.length >= 4) {
     const [topLeft, , bottomRight] = rectangle.coordinates;
-    ctx.strokeStyle = rectangle.color || "#3766E8";
+    const color = rectangle.color || "#3766E8";
+
+    // Calculate rectangle dimensions
+    const width = bottomRight.x - topLeft.x;
+    const height = bottomRight.y - topLeft.y;
+
+    // Save current context state
+    ctx.save();
+
+    // Draw filled rectangle with opacity
+    ctx.globalAlpha = 0.2; // 20% opacity for fill
+    ctx.fillStyle = color;
+    ctx.fillRect(topLeft.x, topLeft.y, width, height);
+
+    // Reset opacity and draw stroke
+    ctx.globalAlpha = 1.0; // Full opacity for stroke
+    ctx.strokeStyle = color;
     ctx.lineWidth = 2;
-    ctx.strokeRect(
-      topLeft.x,
-      topLeft.y,
-      bottomRight.x - topLeft.x,
-      bottomRight.y - topLeft.y
-    );
+    ctx.strokeRect(topLeft.x, topLeft.y, width, height);
+
+    // Restore context state
+    ctx.restore();
   }
 };
-
 export const clearAndDrawBackground = ({
   ctx,
   canvas,

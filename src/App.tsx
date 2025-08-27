@@ -1,18 +1,13 @@
 import "./App.css";
-import { useState } from "react";
-import { RectangleZone } from "./lib/RectangleZone";
-import type { Rectangle } from "./lib/types";
+// import { RectangleZone } from "./lib/RectangleZone";
 
 function App() {
-  const [rectangles, setRectangles] = useState<Rectangle[]>([]);
-
   return (
     <div className="app">
-      <RectangleZone
+      {/* <RectangleZone
         imageSrc="https://architecture-student.com/wp-content/uploads/2010/09/Open-plan-Office.jpg"
-        rectangles={rectangles}
-        setRectangles={setRectangles}
-      />
+        rectangles={[]}
+      /> */}
     </div>
   );
 }
