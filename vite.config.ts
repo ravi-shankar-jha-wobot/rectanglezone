@@ -22,7 +22,7 @@ export default defineConfig({
           "react/jsx-runtime": "react/jsx-runtime",
         },
         assetFileNames: "assets/[name][extname]",
-        entryFileNames: "[name].js",
+        entryFileNames: "index.js",
         chunkFileNames: "chunks/[name]-[hash].js",
       },
     },
