@@ -13,6 +13,7 @@ type UseHandlersProps = {
   savedRectangles: Rectangle[];
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
   drawSavedRectangles: () => void;
+  onChange: ({ coordinates }: { coordinates: Coordinate[] }) => void;
 };
 
 export const useHandlers = ({
@@ -22,6 +23,7 @@ export const useHandlers = ({
   savedRectangles,
   setDrawnRectangle,
   drawSavedRectangles,
+  onChange,
 }: UseHandlersProps) => {
   const isDrawingRef = useRef(false);
   const startPointRef = useRef<Coordinate>({ x: 0, y: 0 });
@@ -92,6 +94,9 @@ export const useHandlers = ({
         ...prev,
         coordinates: [topLeft, topRight, bottomRight, bottomLeft],
       }));
+      onChange({
+        coordinates: [topLeft, topRight, bottomRight, bottomLeft],
+      });
 
       clearAndDrawBackground({
         ctx,
@@ -109,7 +114,14 @@ export const useHandlers = ({
         },
       });
     },
-    [drawnRectangle, drawSavedRectangles, canvasRef, setDrawnRectangle, imgRef]
+    [
+      drawnRectangle,
+      drawSavedRectangles,
+      canvasRef,
+      setDrawnRectangle,
+      imgRef,
+      onChange,
+    ]
   );
 
   const handleMouseUp = useCallback(() => {

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { Rectangle } from "./types";
+import type { Coordinate, Rectangle } from "./types";
 import { useHandlers } from "./hooks/useHandlers";
 import "./StyleRectangleZone.css";
 import { useDrawSavedRectangles } from "./hooks/useDrawSavedRectangles";
@@ -9,12 +9,16 @@ type RectangleZoneProps = {
   rectangles: Rectangle[];
   drawnRectangle: Rectangle | null;
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
+  show: boolean;
+  onChange: ({ coordinates }: { coordinates: Coordinate[] }) => void;
 };
 const RectangleZone = ({
   imageSrc,
   rectangles,
   drawnRectangle,
   setDrawnRectangle,
+  show = true,
+  onChange,
 }: RectangleZoneProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -29,6 +33,7 @@ const RectangleZone = ({
     imgRef,
     rectangles,
     scale: 1,
+    show,
   });
 
   const { handleMouseDown, handleMouseMove, handleMouseUp } = useHandlers({
@@ -38,6 +43,7 @@ const RectangleZone = ({
     savedRectangles: rectangles,
     setDrawnRectangle,
     drawSavedRectangles,
+    onChange,
   });
 
   const handleImgLoad = () => {
