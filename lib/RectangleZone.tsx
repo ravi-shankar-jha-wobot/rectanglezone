@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { Rectangle } from "./types";
 import { useHandlers } from "./hooks/useHandlers";
 import "./StyleRectangleZone.css";
@@ -7,8 +7,6 @@ import { useDrawSavedRectangles } from "./hooks/useDrawSavedRectangles";
 type RectangleZoneProps = {
   imageSrc: string;
   rectangles: Rectangle[];
-  drawnRectangle: Rectangle | null;
-  setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
   onChange: ({
     coordinates,
   }: {
@@ -18,17 +16,15 @@ type RectangleZoneProps = {
 const RectangleZone = ({
   imageSrc,
   rectangles,
-  drawnRectangle,
-  setDrawnRectangle,
   onChange,
 }: RectangleZoneProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  // const [drawnRectangle, setDrawnRectangle] = useState<Rectangle>({
-  //   name: "",
-  //   color: "#3766E8",
-  //   coordinates: [],
-  // });
+  const [drawnRectangle, setDrawnRectangle] = useState<Rectangle>({
+    name: "",
+    color: "#3766E8",
+    coordinates: [],
+  });
 
   const { drawSavedRectangles } = useDrawSavedRectangles({
     canvasRef,
