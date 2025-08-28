@@ -13,7 +13,11 @@ type UseHandlersProps = {
   savedRectangles: Rectangle[];
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
   drawSavedRectangles: () => void;
-  onChange: () => void;
+  onChange: ({
+    coordinates,
+  }: {
+    coordinates: Rectangle["coordinates"];
+  }) => void;
 };
 
 export const useHandlers = ({
@@ -97,7 +101,7 @@ export const useHandlers = ({
       }));
 
       if (typeof onChange === "function") {
-        onChange();
+        onChange({ coordinates: [topLeft, topRight, bottomRight, bottomLeft] });
       }
 
       clearAndDrawBackground({

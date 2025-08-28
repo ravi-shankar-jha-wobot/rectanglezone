@@ -9,7 +9,11 @@ type RectangleZoneProps = {
   rectangles: Rectangle[];
   drawnRectangle: Rectangle | null;
   setDrawnRectangle: React.Dispatch<React.SetStateAction<Rectangle>>;
-  onChange: () => void;
+  onChange: ({
+    coordinates,
+  }: {
+    coordinates: Rectangle["coordinates"];
+  }) => void;
 };
 const RectangleZone = ({
   imageSrc,
