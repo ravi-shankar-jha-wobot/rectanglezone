@@ -53,40 +53,40 @@ const C = ({
     (u) => {
       if (!i.current || typeof c != "function" || !e)
         return;
-      const s = o.current, M = n.current;
-      if (!s || !M) return;
-      const p = s.getContext("2d");
-      if (!p) return;
+      const s = o.current, L = n.current;
+      if (!s || !L) return;
+      const _ = s.getContext("2d");
+      if (!_) return;
       const l = C({
         canvas: o.current,
         e: u
-      }), h = d.current, w = {
+      }), h = d.current, y = {
         x: Math.min(h.x, l.x),
         y: Math.min(h.y, l.y)
-      }, b = {
+      }, M = {
         x: Math.max(h.x, l.x),
         y: Math.min(h.y, l.y)
-      }, L = {
+      }, p = {
         x: Math.max(h.x, l.x),
         y: Math.max(h.y, l.y)
-      }, _ = {
+      }, w = {
         x: Math.min(h.x, l.x),
         y: Math.max(h.y, l.y)
       };
       c((S) => ({
         ...S,
-        coordinates: [w, b, L, _]
-      })), typeof r == "function" && r(), E({
-        ctx: p,
+        coordinates: [y, M, p, w]
+      })), typeof r == "function" && r({ coordinates: [y, M, p, w] }), E({
+        ctx: _,
         canvas: s,
-        img: M
+        img: L
       }), t(), v({
         canvasRef: o,
         imgRef: n,
         rectangle: {
           name: e.name,
           color: e.color,
-          coordinates: [w, b, L, _]
+          coordinates: [y, M, p, w]
         }
       });
     },
@@ -98,12 +98,12 @@ const C = ({
       n,
       r
     ]
-  ), y = g(() => {
+  ), b = g(() => {
     i.current && (i.current = !1);
   }, []);
   return {
     handleMouseMove: m,
-    handleMouseUp: y,
+    handleMouseUp: b,
     handleMouseDown: x
   };
 };
