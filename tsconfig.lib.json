@@ -3,6 +3,10 @@
   "include": ["lib"],
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": false
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "outDir": "./dist",
+    "rootDir": "./lib",
+    "jsx": "react-jsx"
   }
 }

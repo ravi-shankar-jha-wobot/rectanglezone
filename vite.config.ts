@@ -7,7 +7,13 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 export default defineConfig({
   plugins: [
     react(),
-    dts({ include: ["lib/**/*.ts", "lib/**/*.tsx"] }),
+    dts({
+      entryRoot: "lib",
+      outDir: "dist",
+      staticImport: true,
+      insertTypesEntry: true,
+      tsconfigPath: "./tsconfig.lib.json",
+    }),
     cssInjectedByJsPlugin(),
   ],
   build: {
