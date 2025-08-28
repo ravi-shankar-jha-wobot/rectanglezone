@@ -9,4 +9,3 @@ export declare function useDrawSavedRectangles({ canvasRef, imgRef, rectangles, 
     drawSavedRectangles: () => void;
 };
 export {};
-//# sourceMappingURL=useDrawSavedRectangles.d.ts.map

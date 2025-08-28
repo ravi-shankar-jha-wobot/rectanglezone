@@ -2,26 +2,20 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
   plugins: [
     react(),
-    dts({
-      entryRoot: "lib",
-      outDir: "dist",
-      staticImport: true,
-      insertTypesEntry: true,
-      tsconfigPath: "./tsconfig.lib.json",
-    }),
-    cssInjectedByJsPlugin(),
+    libInjectCss(),
+    dts({ include: ["lib/**/*.ts", "lib/**/*.tsx"] }),
   ],
   build: {
-    copyPublicDir: true,
+    copyPublicDir: false,
     lib: {
       entry: path.resolve(__dirname, "lib/index.ts"),
-      name: "rectangle-zone",
-      fileName: "rectangle-zone",
+      name: "rectanglezone",
+      fileName: "rectanglezone",
       formats: ["es"],
     },
     rollupOptions: {
@@ -31,8 +25,8 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "react/jsx-runtime",
-          "react-router-dom": "react-router-dom",
         },
+        assetFileNames: "assets/[name][extname]",
         entryFileNames: "[name].js",
         chunkFileNames: "chunks/[name]-[hash].js",
       },

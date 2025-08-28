@@ -10,4 +10,3 @@ type RectangleZoneProps = {
 };
 declare const RectangleZone: ({ imageSrc, rectangles, drawnRectangle, setDrawnRectangle, onChange, }: RectangleZoneProps) => import("react/jsx-runtime").JSX.Element;
 export { RectangleZone };
-//# sourceMappingURL=RectangleZone.d.ts.map

@@ -12,4 +12,3 @@ export type ClearAndDrawBackgroundParams = {
     canvas: HTMLCanvasElement;
     img: HTMLImageElement;
 };
-//# sourceMappingURL=index.d.ts.map

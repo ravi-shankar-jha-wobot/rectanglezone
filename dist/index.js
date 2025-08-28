@@ -1,7 +1,6 @@
-(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".rectangle_zone_wrapper{position:relative;display:inline-block;width:100%;height:100%}.rectangle_zone_image{display:block;width:100%;height:100%;object-fit:cover}.rectangle_zone_canvas{position:absolute;left:0;top:0;pointer-events:auto;width:100%;height:100%}")),document.head.appendChild(e)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
 import { useRef as f, useCallback as g, useEffect as z } from "react";
 import { jsxs as A, jsx as k } from "react/jsx-runtime";
-const C = ({
+import './assets/index.css';const C = ({
   canvas: o,
   e: n
 }) => {

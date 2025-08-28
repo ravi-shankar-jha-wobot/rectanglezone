@@ -12,4 +12,3 @@ export declare const drawRectangle: ({ canvasRef, imgRef, rectangle, }: {
     rectangle: Rectangle;
 }) => void;
 export declare const clearAndDrawBackground: ({ ctx, canvas, img, }: ClearAndDrawBackgroundParams) => void;
-//# sourceMappingURL=index.d.ts.map

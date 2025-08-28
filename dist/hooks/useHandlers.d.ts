@@ -16,4 +16,3 @@ export declare const useHandlers: ({ canvasRef, imgRef, drawnRectangle, savedRec
     handleMouseDown: (e: React.MouseEvent<HTMLCanvasElement>) => void;
 };
 export {};
-//# sourceMappingURL=useHandlers.d.ts.map
