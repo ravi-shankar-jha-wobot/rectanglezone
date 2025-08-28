@@ -1,63 +1,63 @@
-import { useRef as f, useCallback as g, useEffect as z } from "react";
+import { useRef as f, useCallback as g, useEffect as D, useState as z } from "react";
 import { jsxs as A, jsx as k } from "react/jsx-runtime";
 import './assets/index.css';const C = ({
-  canvas: o,
+  canvas: t,
   e: n
 }) => {
-  if (!o) return { x: 0, y: 0 };
-  const e = o.getBoundingClientRect(), a = o.width / e.width, c = o.height / e.height, t = (n.clientX - e.left) * a, r = (n.clientY - e.top) * c;
-  return { x: t, y: r };
-}, v = ({
-  canvasRef: o,
+  if (!t) return { x: 0, y: 0 };
+  const e = t.getBoundingClientRect(), s = t.width / e.width, r = t.height / e.height, o = (n.clientX - e.left) * s, c = (n.clientY - e.top) * r;
+  return { x: o, y: c };
+}, E = ({
+  canvasRef: t,
   imgRef: n,
   rectangle: e
 }) => {
-  const a = o.current, c = n.current;
-  if (!a || !c) return;
-  const t = a.getContext("2d");
-  if (t && e.coordinates.length >= 4) {
-    const [r, , i] = e.coordinates, d = e.color || "#3766E8", x = i.x - r.x, m = i.y - r.y;
-    t.save(), t.globalAlpha = 0.2, t.fillStyle = d, t.fillRect(r.x, r.y, x, m), t.globalAlpha = 1, t.strokeStyle = d, t.lineWidth = 2, t.strokeRect(r.x, r.y, x, m), t.restore();
+  const s = t.current, r = n.current;
+  if (!s || !r) return;
+  const o = s.getContext("2d");
+  if (o && e.coordinates.length >= 4) {
+    const [c, , i] = e.coordinates, d = e.color || "#3766E8", x = i.x - c.x, m = i.y - c.y;
+    o.save(), o.globalAlpha = 0.2, o.fillStyle = d, o.fillRect(c.x, c.y, x, m), o.globalAlpha = 1, o.strokeStyle = d, o.lineWidth = 2, o.strokeRect(c.x, c.y, x, m), o.restore();
   }
-}, E = ({
-  ctx: o,
+}, S = ({
+  ctx: t,
   canvas: n,
   img: e
 }) => {
-  o.clearRect(0, 0, n.width, n.height), o.drawImage(e, 0, 0, n.width, n.height);
-}, D = ({
-  canvasRef: o,
+  t.clearRect(0, 0, n.width, n.height), t.drawImage(e, 0, 0, n.width, n.height);
+}, I = ({
+  canvasRef: t,
   imgRef: n,
   drawnRectangle: e,
-  savedRectangles: a,
-  setDrawnRectangle: c,
-  drawSavedRectangles: t,
-  onChange: r
+  savedRectangles: s,
+  setDrawnRectangle: r,
+  drawSavedRectangles: o,
+  onChange: c
 }) => {
   const i = f(!1), d = f({ x: 0, y: 0 }), x = g(
     (u) => {
       u.preventDefault();
-      const s = C({
-        canvas: o.current,
+      const a = C({
+        canvas: t.current,
         e: u
       });
-      i.current = !0, d.current = s, c({
-        name: `Rectangle ${a.length + 1}`,
+      i.current = !0, d.current = a, r({
+        name: `Rectangle ${s.length + 1}`,
         color: "#3766E8",
-        coordinates: [s, s, s, s]
+        coordinates: [a, a, a, a]
       });
     },
-    [c, a.length, o]
+    [r, s.length, t]
   ), m = g(
     (u) => {
-      if (!i.current || typeof c != "function" || !e)
+      if (!i.current || typeof r != "function" || !e)
         return;
-      const s = o.current, L = n.current;
-      if (!s || !L) return;
-      const _ = s.getContext("2d");
+      const a = t.current, L = n.current;
+      if (!a || !L) return;
+      const _ = a.getContext("2d");
       if (!_) return;
       const l = C({
-        canvas: o.current,
+        canvas: t.current,
         e: u
       }), h = d.current, y = {
         x: Math.min(h.x, l.x),
@@ -72,15 +72,15 @@ import './assets/index.css';const C = ({
         x: Math.min(h.x, l.x),
         y: Math.max(h.y, l.y)
       };
-      c((S) => ({
-        ...S,
+      r((v) => ({
+        ...v,
         coordinates: [y, M, p, w]
-      })), typeof r == "function" && r({ coordinates: [y, M, p, w] }), E({
+      })), typeof c == "function" && c({ coordinates: [y, M, p, w] }), S({
         ctx: _,
-        canvas: s,
+        canvas: a,
         img: L
-      }), t(), v({
-        canvasRef: o,
+      }), o(), E({
+        canvasRef: t,
         imgRef: n,
         rectangle: {
           name: e.name,
@@ -91,11 +91,11 @@ import './assets/index.css';const C = ({
     },
     [
       e,
-      t,
       o,
-      c,
+      t,
+      r,
       n,
-      r
+      c
     ]
   ), b = g(() => {
     i.current && (i.current = !1);
@@ -106,58 +106,60 @@ import './assets/index.css';const C = ({
     handleMouseDown: x
   };
 };
-function I({
-  canvasRef: o,
+function N({
+  canvasRef: t,
   imgRef: n,
   rectangles: e,
-  scale: a
+  scale: s
 }) {
-  const c = g(() => {
-    e.forEach((t) => {
-      v({
-        canvasRef: o,
+  const r = g(() => {
+    e.forEach((o) => {
+      E({
+        canvasRef: t,
         imgRef: n,
-        rectangle: t
+        rectangle: o
       });
     });
-  }, [e, o, n]);
-  return z(() => {
-    const t = o?.current, r = t?.getContext("2d"), i = n.current;
-    !t || !r || !i || (E({ ctx: r, canvas: t, img: i }), c());
-  }, [o, n, e, a, c]), { drawSavedRectangles: c };
+  }, [e, t, n]);
+  return D(() => {
+    const o = t?.current, c = o?.getContext("2d"), i = n.current;
+    !o || !c || !i || (S({ ctx: c, canvas: o, img: i }), r());
+  }, [t, n, e, s, r]), { drawSavedRectangles: r };
 }
-const U = ({
-  imageSrc: o,
+const j = ({
+  imageSrc: t,
   rectangles: n,
-  drawnRectangle: e,
-  setDrawnRectangle: a,
-  onChange: c
+  onChange: e
 }) => {
-  const t = f(null), r = f(null), { drawSavedRectangles: i } = I({
+  const s = f(null), r = f(null), [o, c] = z({
+    name: "",
+    color: "#3766E8",
+    coordinates: []
+  }), { drawSavedRectangles: i } = N({
     canvasRef: r,
-    imgRef: t,
+    imgRef: s,
     rectangles: n,
     scale: 1
-  }), { handleMouseDown: d, handleMouseMove: x, handleMouseUp: m } = D({
+  }), { handleMouseDown: d, handleMouseMove: x, handleMouseUp: m } = I({
     canvasRef: r,
-    imgRef: t,
-    drawnRectangle: e,
+    imgRef: s,
+    drawnRectangle: o,
     savedRectangles: n,
-    setDrawnRectangle: a,
+    setDrawnRectangle: c,
     drawSavedRectangles: i,
-    onChange: c
+    onChange: e
   });
   return /* @__PURE__ */ A("div", { className: "rectangle_zone_wrapper", children: [
     /* @__PURE__ */ k(
       "img",
       {
-        ref: t,
-        src: o,
+        ref: s,
+        src: t,
         alt: "rect-background",
         className: "rectangle_zone_image",
         onLoad: () => {
-          const u = t.current, s = r.current;
-          u && s && (s.width = u.naturalWidth, s.height = u.naturalHeight);
+          const u = s.current, a = r.current;
+          u && a && (a.width = u.naturalWidth, a.height = u.naturalHeight);
         },
         crossOrigin: "anonymous"
       }
@@ -175,9 +177,9 @@ const U = ({
   ] });
 };
 export {
-  U as RectangleZone,
-  E as clearAndDrawBackground,
-  v as drawRectangle,
+  j as RectangleZone,
+  S as clearAndDrawBackground,
+  E as drawRectangle,
   C as getCanvasCoordinates,
-  D as useHandlers
+  I as useHandlers
 };
